@@ -1,16 +1,6 @@
-# Build stage
-FROM golang:1.24 AS builder
-
-WORKDIR /app
-
-COPY go.mod ./
-COPY . .
-
-RUN CGO_ENABLED=0 GOOS=linux go build -o demo .
-
-# Run stage
-FROM scratch
-
-COPY --from=builder /app/demo /demo
-
-ENTRYPOINT ["/demo"]
+# Pull in the base image
+FROM alpine:3.24
+# Copy binary demo to the folder `/bin/`
+COPY demo /bin/demo
+# Run the service demo when a container is launched
+ENTRYPOINT ["/bin/demo"]
