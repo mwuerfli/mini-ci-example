@@ -10,7 +10,7 @@ import (
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request received from", r.RemoteAddr)
 	t := roundToNearestMinute(time.Now())
-	fmt.Fprintf(w, "Hi there, it is %d:%d", t.Hour(), t.Minute())
+	fmt.Fprintf(w, "Hi there, it is ein Obi Van %d:%d", t.Hour(), t.Minute())
 }
 
 func roundToNearestMinute(t time.Time) time.Time {
