@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  continuous_integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Run a one-line script
+        run: echo Starting tests and build
+
+      - name: Run test and build
+        run: |
+          go test -v ./...
+          CGO_ENABLED=0 GOARCH=amd64 go build -o demo
